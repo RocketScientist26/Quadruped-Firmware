@@ -1,0 +1,15 @@
+../Src/App/app.c:36:9:App_RESET_Button_Read	16	static
+../Src/App/app.c:48:6:App_Action_Cancel	4	static
+../Src/App/app.c:55:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Src/App/app.c:60:6:HAL_UART_RxCpltCallback	16	static
+../Src/App/app.c:63:6:HAL_GPIO_EXTI_Callback	16	static
+../Src/App/app.c:75:6:App_SysTick_Call	8	static
+../Src/App/app.c:84:6:App_Loop_Settings	8	static
+../Src/App/app.c:105:6:App_Loop_Buttons_Mode_Actions	16	static
+../Src/App/app.c:128:6:App_Loop_Kick	16	static
+../Src/App/app.c:140:6:App_Loop_Drive	8	static
+../Src/App/app.c:145:6:App_Loop_Special_Tricks	16	static
+../Src/App/app.c:161:6:App_Loop_Settings_Mode_Enter	16	static
+../Src/App/app.c:170:6:App_Loop_Return_To_Stay	16	static
+../Src/App/app.c:189:6:App_Init	8	static
+../Src/App/app.c:196:6:App_Loop	8	static

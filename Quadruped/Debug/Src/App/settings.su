@@ -1,0 +1,3 @@
+../Src/App/settings.c:15:6:Settings_Bluetooth_Change	24	static
+../Src/App/settings.c:71:6:Settings_Reset	8	static
+../Src/App/settings.c:93:6:Settings_Read	24	static
