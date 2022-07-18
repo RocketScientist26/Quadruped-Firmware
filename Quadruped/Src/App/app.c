@@ -36,7 +36,7 @@ extern float movements_kick_pose[8];
 uint8_t App_RESET_Button_Read(){
 	uint8_t i = 0;
 	while(i != 10){
-		if(HAL_GPIO_ReadPin(BUTTON_SET_RESET_GPIO_Port, BUTTON_SET_RESET_Pin) == GPIO_PIN_SET){
+		if(HAL_GPIO_ReadPin(BUTTON_RESET_GPIO_Port, BUTTON_RESET_Pin) == GPIO_PIN_SET){
 			return 0;
 		}
 		i++;
@@ -61,14 +61,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	Bluetooth_Read_Message();
 }
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == BUTTON_SET_RESET_Pin){
-		if(HAL_GPIO_ReadPin(BUTTON_SET_RESET_GPIO_Port, BUTTON_SET_RESET_Pin) == GPIO_PIN_RESET){
+	if(GPIO_Pin == BUTTON_RESET_Pin){
+		if(HAL_GPIO_ReadPin(BUTTON_RESET_GPIO_Port, BUTTON_RESET_Pin) == GPIO_PIN_RESET){
 			app_action_button_reset = 1;
 		}
 	}
 	if(GPIO_Pin == BT_STAT_Pin){
 		if(HAL_GPIO_ReadPin(BT_STAT_GPIO_Port, BT_STAT_Pin) == GPIO_PIN_RESET){
-			//EXT
+			//Bluetoot disconnected
 		}
 	}
 }

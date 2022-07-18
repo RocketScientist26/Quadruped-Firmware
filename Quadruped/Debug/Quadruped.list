@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020ca0  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000f9ac  00000000  00000000  00020cc9  2**0
+ 12 .debug_info   0000f9e0  00000000  00000000  00020cc9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002d38  00000000  00000000  00030675  2**0
+ 13 .debug_abbrev 00002d38  00000000  00000000  000306a9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000f98  00000000  00000000  000333b0  2**3
+ 14 .debug_aranges 00000f98  00000000  00000000  000333e8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000e60  00000000  00000000  00034348  2**3
+ 15 .debug_ranges 00000e60  00000000  00000000  00034380  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0001904f  00000000  00000000  000351a8  2**0
+ 16 .debug_macro  0001904f  00000000  00000000  000351e0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00011e74  00000000  00000000  0004e1f7  2**0
+ 17 .debug_line   00011e74  00000000  00000000  0004e22f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008bd63  00000000  00000000  0006006b  2**0
+ 18 .debug_str    0008bdaa  00000000  00000000  000600a3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  000ebdce  2**0
+ 19 .comment      00000050  00000000  00000000  000ebe4d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003eec  00000000  00000000  000ebe20  2**2
+ 20 .debug_frame  00003eec  00000000  00000000  000ebea0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -9425,7 +9425,7 @@ uint8_t App_RESET_Button_Read(){
  800365c:	71fb      	strb	r3, [r7, #7]
 	while(i != 10){
  800365e:	e00b      	b.n	8003678 <App_RESET_Button_Read+0x24>
-		if(HAL_GPIO_ReadPin(BUTTON_SET_RESET_GPIO_Port, BUTTON_SET_RESET_Pin) == GPIO_PIN_SET){
+		if(HAL_GPIO_ReadPin(BUTTON_RESET_GPIO_Port, BUTTON_RESET_Pin) == GPIO_PIN_SET){
  8003660:	2108      	movs	r1, #8
  8003662:	4809      	ldr	r0, [pc, #36]	; (8003688 <App_RESET_Button_Read+0x34>)
  8003664:	f7fd fdd4 	bl	8001210 <HAL_GPIO_ReadPin>
@@ -9528,11 +9528,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
  80036f4:	af00      	add	r7, sp, #0
  80036f6:	4603      	mov	r3, r0
  80036f8:	80fb      	strh	r3, [r7, #6]
-	if(GPIO_Pin == BUTTON_SET_RESET_Pin){
+	if(GPIO_Pin == BUTTON_RESET_Pin){
  80036fa:	88fb      	ldrh	r3, [r7, #6]
  80036fc:	2b08      	cmp	r3, #8
  80036fe:	d109      	bne.n	8003714 <HAL_GPIO_EXTI_Callback+0x24>
-		if(HAL_GPIO_ReadPin(BUTTON_SET_RESET_GPIO_Port, BUTTON_SET_RESET_Pin) == GPIO_PIN_RESET){
+		if(HAL_GPIO_ReadPin(BUTTON_RESET_GPIO_Port, BUTTON_RESET_Pin) == GPIO_PIN_RESET){
  8003700:	2108      	movs	r1, #8
  8003702:	480b      	ldr	r0, [pc, #44]	; (8003730 <HAL_GPIO_EXTI_Callback+0x40>)
  8003704:	f7fd fd84 	bl	8001210 <HAL_GPIO_ReadPin>
@@ -9553,7 +9553,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
  800371c:	f44f 7180 	mov.w	r1, #256	; 0x100
  8003720:	4803      	ldr	r0, [pc, #12]	; (8003730 <HAL_GPIO_EXTI_Callback+0x40>)
  8003722:	f7fd fd75 	bl	8001210 <HAL_GPIO_ReadPin>
-			//EXT
+			//Bluetoot disconnected
 		}
 	}
 }
@@ -10204,14 +10204,15 @@ void App_Loop(){
 
 	App_Loop_Return_To_Stay();//Check if movement finished and we need to return no standby pose
  8003ba8:	f7ff ff8c 	bl	8003ac4 <App_Loop_Return_To_Stay>
+}
  8003bac:	bf00      	nop
  8003bae:	bd80      	pop	{r7, pc}
 
 08003bb0 <Bluetooth_UART_Listen>:
-extern int8_t servo_calibration_values[8];
-extern uint8_t settings[35];
 
 uint8_t bluetooth_rx_data[512];
+uint8_t bluetooth_encrypted_request_code[256];
+uint8_t bluetooth_encrypted_response_code[512];
 
 void Bluetooth_UART_Listen(){
  8003bb0:	b580      	push	{r7, lr}
@@ -10527,7 +10528,7 @@ void Bluetooth_Read_Message(){
  8003dcc:	4b51      	ldr	r3, [pc, #324]	; (8003f14 <Bluetooth_Read_Message+0x280>)
  8003dce:	2208      	movs	r2, #8
  8003dd0:	701a      	strb	r2, [r3, #0]
-					Bluetooth_UART_Timer_Reset();
+				Bluetooth_UART_Timer_Reset();
  8003dd2:	f7ff ff13 	bl	8003bfc <Bluetooth_UART_Timer_Reset>
  8003dd6:	e0ee      	b.n	8003fb6 <Bluetooth_Read_Message+0x322>
 			}
@@ -10562,7 +10563,6 @@ void Bluetooth_Read_Message(){
  8003e02:	f7ff fefb 	bl	8003bfc <Bluetooth_UART_Timer_Reset>
  8003e06:	e0d6      	b.n	8003fb6 <Bluetooth_Read_Message+0x322>
 			}
-
 			//LED
 			else if(bluetooth_rx_data[0] == 'E'){
  8003e08:	4b41      	ldr	r3, [pc, #260]	; (8003f10 <Bluetooth_Read_Message+0x27c>)
@@ -10600,7 +10600,6 @@ void Bluetooth_Read_Message(){
  8003e3c:	f000 f95c 	bl	80040f8 <Flash_Write>
  8003e40:	e0b9      	b.n	8003fb6 <Bluetooth_Read_Message+0x322>
 			}
-
 			//Settings
 			else if(bluetooth_rx_data[0] == 'S'){
  8003e42:	4b33      	ldr	r3, [pc, #204]	; (8003f10 <Bluetooth_Read_Message+0x27c>)
@@ -10718,7 +10717,6 @@ void Bluetooth_Read_Message(){
 				if((bluetooth_rx_data[0] == 'O')||(bluetooth_rx_data[0] == 'W')){
  8003efa:	e05b      	b.n	8003fb4 <Bluetooth_Read_Message+0x320>
 					}
-
 				}
 				else if(bluetooth_rx_data[0] == 'C'){//Settings page closed #SC
  8003efc:	4b04      	ldr	r3, [pc, #16]	; (8003f10 <Bluetooth_Read_Message+0x27c>)
@@ -13223,14 +13221,14 @@ int main(void)
   MX_USART1_UART_Init();
  80050dc:	f000 fa58 	bl	8005590 <MX_USART1_UART_Init>
   /* USER CODE BEGIN 2 */
-  App_Init();
+App_Init();
  80050e0:	f7fe fd3c 	bl	8003b5c <App_Init>
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    App_Loop();
+App_Loop();
  80050e4:	f7fe fd52 	bl	8003b8c <App_Loop>
  80050e8:	e7fc      	b.n	80050e4 <main+0x2c>
 
@@ -14163,8 +14161,8 @@ static void MX_GPIO_Init(void)
  800562e:	481a      	ldr	r0, [pc, #104]	; (8005698 <MX_GPIO_Init+0xb4>)
  8005630:	f7fb fe05 	bl	800123e <HAL_GPIO_WritePin>
 
-  /*Configure GPIO pins : BUTTON_SET_RESET_Pin BT_STAT_Pin */
-  GPIO_InitStruct.Pin = BUTTON_SET_RESET_Pin|BT_STAT_Pin;
+  /*Configure GPIO pins : BUTTON_RESET_Pin BT_STAT_Pin */
+  GPIO_InitStruct.Pin = BUTTON_RESET_Pin|BT_STAT_Pin;
  8005634:	f44f 7384 	mov.w	r3, #264	; 0x108
  8005638:	60bb      	str	r3, [r7, #8]
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
@@ -14549,7 +14547,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
  8005878:	f003 0308 	and.w	r3, r3, #8
  800587c:	60fb      	str	r3, [r7, #12]
  800587e:	68fb      	ldr	r3, [r7, #12]
-    GPIO_InitStruct.Pin = SERV_3_Pin|SERV_4_Pin|SERV_1_Pin|SERV_2_Pin;
+    GPIO_InitStruct.Pin = SERVO_3_Pin|SERVO_4_Pin|SERVO_1_Pin|SERVO_2_Pin;
  8005880:	2333      	movs	r3, #51	; 0x33
  8005882:	617b      	str	r3, [r7, #20]
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -14598,7 +14596,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
  80058d8:	f003 0308 	and.w	r3, r3, #8
  80058dc:	60bb      	str	r3, [r7, #8]
  80058de:	68bb      	ldr	r3, [r7, #8]
-    GPIO_InitStruct.Pin = SERV_5_Pin|SERV_6_Pin|SERV_7_Pin|SERV_8_Pin;
+    GPIO_InitStruct.Pin = SERVO_5_Pin|SERVO_6_Pin|SERVO_7_Pin|SERVO_8_Pin;
  80058e0:	f44f 7370 	mov.w	r3, #960	; 0x3c0
  80058e4:	617b      	str	r3, [r7, #20]
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -14908,7 +14906,7 @@ void EXTI3_IRQHandler(void)
   /* USER CODE BEGIN EXTI3_IRQn 0 */
 
   /* USER CODE END EXTI3_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(BUTTON_SET_RESET_Pin);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_RESET_Pin);
  8005a20:	2008      	movs	r0, #8
  8005a22:	f7fb fc25 	bl	8001270 <HAL_GPIO_EXTI_IRQHandler>
   /* USER CODE BEGIN EXTI3_IRQn 1 */

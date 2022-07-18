@@ -22,6 +22,8 @@ extern int8_t servo_calibration_values[8];
 extern uint8_t settings[35];
 
 uint8_t bluetooth_rx_data[512];
+uint8_t bluetooth_encrypted_request_code[256];
+uint8_t bluetooth_encrypted_response_code[512];
 
 void Bluetooth_UART_Listen(){
 	HAL_UART_Receive_IT(&huart1, &bluetooth_rx_data[0], 1);
@@ -79,7 +81,7 @@ void Bluetooth_Read_Message(){
 				app_driving_direction = ((bluetooth_rx_data[0]-48)*100)+((bluetooth_rx_data[1]-48)*10)+(bluetooth_rx_data[2]-48);
 				app_driving_speed = ((bluetooth_rx_data[4]-48)*10)+(bluetooth_rx_data[5]-48);
 				app_action = 8;
-					Bluetooth_UART_Timer_Reset();
+				Bluetooth_UART_Timer_Reset();
 			}
 			//Special Tricks
 			else if(bluetooth_rx_data[0] == 'D'){
@@ -90,7 +92,6 @@ void Bluetooth_Read_Message(){
 				}
 				Bluetooth_UART_Timer_Reset();
 			}
-
 			//LED
 			else if(bluetooth_rx_data[0] == 'E'){
 				//#E0 #E1
@@ -105,7 +106,6 @@ void Bluetooth_Read_Message(){
 				}
 				Flash_Write(&settings[0],35);
 			}
-
 			//Settings
 			else if(bluetooth_rx_data[0] == 'S'){
 				//nastroikebis dgomi da dabruneba parametrebis
@@ -133,7 +133,6 @@ void Bluetooth_Read_Message(){
 					else if(bluetooth_rx_data[0] == 'W'){//Write configuration to flash request #SW
 						Flash_Write(&settings[0],35);
 					}
-
 				}
 				else if(bluetooth_rx_data[0] == 'C'){//Settings page closed #SC
 					app_return_to_stay = APP_STAY_FROM_BTNS_DRIVE_SETTINGS;

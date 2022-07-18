@@ -41,13 +41,11 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
- CRC_HandleTypeDef hcrc;
-
+CRC_HandleTypeDef hcrc;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
-
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
@@ -486,8 +484,8 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pins : BUTTON_SET_RESET_Pin BT_STAT_Pin */
-  GPIO_InitStruct.Pin = BUTTON_SET_RESET_Pin|BT_STAT_Pin;
+  /*Configure GPIO pins : BUTTON_RESET_Pin BT_STAT_Pin */
+  GPIO_InitStruct.Pin = BUTTON_RESET_Pin|BT_STAT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);

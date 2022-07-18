@@ -1958,6 +1958,10 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Src/App/bluetooth.o
  .data          0x0000000000000000        0x0 ./Src/App/bluetooth.o
  .bss           0x0000000000000000        0x0 ./Src/App/bluetooth.o
+ .bss.bluetooth_encrypted_request_code
+                0x0000000000000000      0x100 ./Src/App/bluetooth.o
+ .bss.bluetooth_encrypted_response_code
+                0x0000000000000000      0x200 ./Src/App/bluetooth.o
  .debug_macro   0x0000000000000000      0xa6c ./Src/App/bluetooth.o
  .debug_macro   0x0000000000000000      0x221 ./Src/App/bluetooth.o
  .debug_macro   0x0000000000000000       0x2e ./Src/App/bluetooth.o
@@ -4152,7 +4156,7 @@ LOAD c:/direct/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.m
 LOAD c:/direct/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a
 LOAD c:/direct/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp\libgcc.a
 
-.debug_info     0x0000000000000000     0xf9ac
+.debug_info     0x0000000000000000     0xf9e0
  .debug_info    0x0000000000000000      0x734 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_info    0x0000000000000734      0xb20 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .debug_info    0x0000000000001254      0x3a6 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_crc.o
@@ -4165,18 +4169,18 @@ LOAD c:/direct/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.m
  .debug_info    0x00000000000062b8     0x1513 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
  .debug_info    0x00000000000077cb     0x15d8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
  .debug_info    0x0000000000008da3      0xdc8 ./Src/App/app.o
- .debug_info    0x0000000000009b6b      0xc90 ./Src/App/bluetooth.o
- .debug_info    0x000000000000a7fb      0x2c6 ./Src/App/flash.o
- .debug_info    0x000000000000aac1      0x27d ./Src/App/general.o
- .debug_info    0x000000000000ad3e      0x76f ./Src/App/led.o
- .debug_info    0x000000000000b4ad      0x150 ./Src/App/movements.o
- .debug_info    0x000000000000b5fd      0x9fe ./Src/App/servo.o
- .debug_info    0x000000000000bffb      0x95c ./Src/App/settings.o
- .debug_info    0x000000000000c957     0x129a ./Src/main.o
- .debug_info    0x000000000000dbf1      0xfd4 ./Src/stm32f1xx_hal_msp.o
- .debug_info    0x000000000000ebc5      0x9cd ./Src/stm32f1xx_it.o
- .debug_info    0x000000000000f592      0x3f8 ./Src/system_stm32f1xx.o
- .debug_info    0x000000000000f98a       0x22 ./Startup/startup_stm32f103c8tx.o
+ .debug_info    0x0000000000009b6b      0xcc4 ./Src/App/bluetooth.o
+ .debug_info    0x000000000000a82f      0x2c6 ./Src/App/flash.o
+ .debug_info    0x000000000000aaf5      0x27d ./Src/App/general.o
+ .debug_info    0x000000000000ad72      0x76f ./Src/App/led.o
+ .debug_info    0x000000000000b4e1      0x150 ./Src/App/movements.o
+ .debug_info    0x000000000000b631      0x9fe ./Src/App/servo.o
+ .debug_info    0x000000000000c02f      0x95c ./Src/App/settings.o
+ .debug_info    0x000000000000c98b     0x129a ./Src/main.o
+ .debug_info    0x000000000000dc25      0xfd4 ./Src/stm32f1xx_hal_msp.o
+ .debug_info    0x000000000000ebf9      0x9cd ./Src/stm32f1xx_it.o
+ .debug_info    0x000000000000f5c6      0x3f8 ./Src/system_stm32f1xx.o
+ .debug_info    0x000000000000f9be       0x22 ./Startup/startup_stm32f103c8tx.o
 
 .debug_abbrev   0x0000000000000000     0x2d38
  .debug_abbrev  0x0000000000000000      0x1fb ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
@@ -4407,7 +4411,7 @@ LOAD c:/direct/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.m
  .debug_line    0x00000000000116c3      0x732 ./Src/system_stm32f1xx.o
  .debug_line    0x0000000000011df5       0x7f ./Startup/startup_stm32f103c8tx.o
 
-.debug_str      0x0000000000000000    0x8bd63
+.debug_str      0x0000000000000000    0x8bdaa
  .debug_str     0x0000000000000000    0x836e3 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                                       0x83b79 (size before relaxing)
  .debug_str     0x00000000000836e3      0x2cf ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -4430,31 +4434,31 @@ LOAD c:/direct/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.m
                                       0x8407c (size before relaxing)
  .debug_str     0x0000000000086202      0x7d9 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
                                       0x83e80 (size before relaxing)
- .debug_str     0x00000000000869db      0xe64 ./Src/App/app.o
-                                      0x84951 (size before relaxing)
- .debug_str     0x000000000008783f       0xe1 ./Src/App/bluetooth.o
-                                      0x8411b (size before relaxing)
- .debug_str     0x0000000000087920       0x49 ./Src/App/flash.o
-                                      0x837ab (size before relaxing)
- .debug_str     0x0000000000087969     0x3e89 ./Src/App/general.o
-                                      0x87536 (size before relaxing)
- .debug_str     0x000000000008b7f2       0xfb ./Src/App/led.o
-                                      0x83cb7 (size before relaxing)
- .debug_str     0x000000000008b8ed       0x6f ./Src/App/movements.o
+ .debug_str     0x00000000000869db      0xe68 ./Src/App/app.o
+                                      0x84955 (size before relaxing)
+ .debug_str     0x0000000000087843      0x124 ./Src/App/bluetooth.o
+                                      0x84162 (size before relaxing)
+ .debug_str     0x0000000000087967       0x49 ./Src/App/flash.o
+                                      0x837af (size before relaxing)
+ .debug_str     0x00000000000879b0     0x3e89 ./Src/App/general.o
+                                      0x8753a (size before relaxing)
+ .debug_str     0x000000000008b839       0xfb ./Src/App/led.o
+                                      0x83cbb (size before relaxing)
+ .debug_str     0x000000000008b934       0x6f ./Src/App/movements.o
                                        0x4384 (size before relaxing)
- .debug_str     0x000000000008b95c      0x11b ./Src/App/servo.o
-                                      0x844d8 (size before relaxing)
- .debug_str     0x000000000008ba77       0x7c ./Src/App/settings.o
-                                      0x83c21 (size before relaxing)
- .debug_str     0x000000000008baf3       0xc3 ./Src/main.o
-                                      0x8462e (size before relaxing)
- .debug_str     0x000000000008bbb6       0x25 ./Src/stm32f1xx_hal_msp.o
-                                      0x8425e (size before relaxing)
- .debug_str     0x000000000008bbdb       0xee ./Src/stm32f1xx_it.o
-                                      0x83f01 (size before relaxing)
- .debug_str     0x000000000008bcc9       0x69 ./Src/system_stm32f1xx.o
+ .debug_str     0x000000000008b9a3      0x11b ./Src/App/servo.o
+                                      0x844dc (size before relaxing)
+ .debug_str     0x000000000008babe       0x7c ./Src/App/settings.o
+                                      0x83c25 (size before relaxing)
+ .debug_str     0x000000000008bb3a       0xc3 ./Src/main.o
+                                      0x84632 (size before relaxing)
+ .debug_str     0x000000000008bbfd       0x25 ./Src/stm32f1xx_hal_msp.o
+                                      0x84262 (size before relaxing)
+ .debug_str     0x000000000008bc22       0xee ./Src/stm32f1xx_it.o
+                                      0x83f05 (size before relaxing)
+ .debug_str     0x000000000008bd10       0x69 ./Src/system_stm32f1xx.o
                                       0x834bb (size before relaxing)
- .debug_str     0x000000000008bd32       0x31 ./Startup/startup_stm32f103c8tx.o
+ .debug_str     0x000000000008bd79       0x31 ./Startup/startup_stm32f103c8tx.o
                                          0x79 (size before relaxing)
 
 .comment        0x0000000000000000       0x50

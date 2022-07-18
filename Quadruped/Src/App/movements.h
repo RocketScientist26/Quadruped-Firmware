@@ -16,11 +16,11 @@
 
 //movements_buttons_mode_patterns
 #define MOV_BTNS_MODE_SAMPLES_SP1 	30
-#define MOV_BTNS_MODE_DELAY_SP1 	3
+#define MOV_BTNS_MODE_DELAY_SP1 		3
 #define MOV_BTNS_MODE_SAMPLES_SP2 	30
-#define MOV_BTNS_MODE_DELAY_SP2 	3
+#define MOV_BTNS_MODE_DELAY_SP2 		3
 #define MOV_BTNS_MODE_SAMPLES_SP3 	32
-#define MOV_BTNS_MODE_DELAY_SP3 	3
+#define MOV_BTNS_MODE_DELAY_SP3 		3
 
 	///Forward, Backward
 #define MOV_BTNS_MODE_FW_BW_SP1_V_UP 22

@@ -219,7 +219,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
     PB4     ------> TIM3_CH1
     PB5     ------> TIM3_CH2
     */
-    GPIO_InitStruct.Pin = SERV_3_Pin|SERV_4_Pin|SERV_1_Pin|SERV_2_Pin;
+    GPIO_InitStruct.Pin = SERVO_3_Pin|SERVO_4_Pin|SERVO_1_Pin|SERVO_2_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -243,7 +243,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
     PB8     ------> TIM4_CH3
     PB9     ------> TIM4_CH4
     */
-    GPIO_InitStruct.Pin = SERV_5_Pin|SERV_6_Pin|SERV_7_Pin|SERV_8_Pin;
+    GPIO_InitStruct.Pin = SERVO_5_Pin|SERVO_6_Pin|SERVO_7_Pin|SERVO_8_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
