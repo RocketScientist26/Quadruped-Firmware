@@ -1,7 +1,7 @@
+#include <string.h>
 #include "main.h"
 #include "settings.h"
 #include "flash.h"
-#include "general.h"
 
 extern UART_HandleTypeDef huart1;
 
@@ -22,7 +22,7 @@ void Settings_Bluetooth_Change(uint8_t *name, uint8_t *password){
 	HAL_Delay(300);
 
 	//Copy "AT+NAME"
-	General_Copy(&settings_bt_name_default[0], &settings_bt_tmp[0],7);
+	memcpy(&settings_bt_tmp[0], &settings_bt_name_default[0], 7);
 	//Copy name
 	uint8_t i = 0;
 	while(i != 10){
@@ -42,7 +42,7 @@ void Settings_Bluetooth_Change(uint8_t *name, uint8_t *password){
 
 
 	//Copy "AT+PIN"
-	General_Copy(&settings_bt_password_default[0], &settings_bt_tmp[0],6);
+	memcpy(&settings_bt_tmp[0], &settings_bt_password_default[0], 6);
 	//Copy password
 	i = 0;
 	while(i != 4){
@@ -70,7 +70,7 @@ void Settings_Bluetooth_Change(uint8_t *name, uint8_t *password){
 }
 void Settings_Reset(){
 	Flash_Write(settings_default,35);
-	General_Copy(&settings_default[0], &settings[0],35);
+	memcpy(&settings[0], &settings_default[0], 35);
 
 	//Reset Bluetooth name and password to defaults
 	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
@@ -97,7 +97,7 @@ void Settings_Read(int8_t *calib, uint8_t *led){
 		Settings_Reset();
 	}
 
-	//Read LED status from string
+	//Read LED enabled or not from string
 	if(settings[32] == '1'){
 		led = (uint8_t *)((uint8_t)1);
 	}else{

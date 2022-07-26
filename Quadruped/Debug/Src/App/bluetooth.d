@@ -26,7 +26,7 @@ Src/App/bluetooth.o: ../Src/App/bluetooth.c ../Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Src/App/bluetooth.h ../Src/App/app.h ../Src/App/flash.h \
- ../Src/App/general.h ../Src/App/led.h ../Src/App/servo.h
+ ../Src/App/led.h ../Src/App/servo.h
 ../Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Inc/stm32f1xx_hal_conf.h:
@@ -57,6 +57,5 @@ Src/App/bluetooth.o: ../Src/App/bluetooth.c ../Inc/main.h \
 ../Src/App/bluetooth.h:
 ../Src/App/app.h:
 ../Src/App/flash.h:
-../Src/App/general.h:
 ../Src/App/led.h:
 ../Src/App/servo.h:

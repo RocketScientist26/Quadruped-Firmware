@@ -1,8 +1,8 @@
+#include <string.h>
 #include "main.h"
 #include "bluetooth.h"
 #include "app.h"
 #include "flash.h"
-#include "general.h"
 #include "led.h"
 #include "servo.h"
 
@@ -150,8 +150,8 @@ void Bluetooth_Read_Message(){
 				}
 				else if(bluetooth_rx_data[0] == 'S'){//Set new Bluetooth name and password #SSNNNNNNNNNNPPPP
 					Bluetooth_Receive(14);
-					General_Copy(&bluetooth_rx_data[10], &settings[18],4);	//#C-0-0-0-0-0-0-0-01234Quadruped 1\n
-					General_Copy(&bluetooth_rx_data[0], &settings[22],10);
+					memcpy(&settings[18], &bluetooth_rx_data[10], 4);	//#C-0-0-0-0-0-0-0-01234Quadruped 1\n
+					memcpy(&settings[22], &bluetooth_rx_data[0], 10);
 					Flash_Write(&settings[0],35);
 					//Wait for disconnecting, than change name/password and reset Bluetooth
 					app_action_name_and_password_changed = 1;

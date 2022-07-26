@@ -41,7 +41,6 @@ uint32_t Flash_Write(uint8_t *data, uint16_t length){
 	HAL_FLASH_Unlock();
 	HAL_FLASHEx_Erase(&EraseInitStruct, &ErrorCode);
 
-	//4is jeradis mere gadayris
 	uint16_t fpages = length/4;
 	uint16_t lbytes = length-(fpages*4);
 	uint16_t i = 0;
