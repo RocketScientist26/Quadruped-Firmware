@@ -1,0 +1,4 @@
+../Src/App/Device/interrupts.c:9:6:Interrupts_SysTick	8	static
+../Src/App/Device/interrupts.c:16:6:HAL_UART_ErrorCallback	16	static
+../Src/App/Device/interrupts.c:21:6:HAL_UART_RxCpltCallback	16	static
+../Src/App/Device/interrupts.c:26:6:HAL_GPIO_EXTI_Callback	16	static

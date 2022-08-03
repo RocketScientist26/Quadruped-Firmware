@@ -5,33 +5,24 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/App/anim_data.c \
+../Src/App/animation.c \
 ../Src/App/app.c \
-../Src/App/bluetooth.c \
-../Src/App/flash.c \
-../Src/App/general.c \
-../Src/App/led.c \
-../Src/App/movements.c \
-../Src/App/servo.c \
+../Src/App/parser.c \
 ../Src/App/settings.c 
 
 OBJS += \
+./Src/App/anim_data.o \
+./Src/App/animation.o \
 ./Src/App/app.o \
-./Src/App/bluetooth.o \
-./Src/App/flash.o \
-./Src/App/general.o \
-./Src/App/led.o \
-./Src/App/movements.o \
-./Src/App/servo.o \
+./Src/App/parser.o \
 ./Src/App/settings.o 
 
 C_DEPS += \
+./Src/App/anim_data.d \
+./Src/App/animation.d \
 ./Src/App/app.d \
-./Src/App/bluetooth.d \
-./Src/App/flash.d \
-./Src/App/general.d \
-./Src/App/led.d \
-./Src/App/movements.d \
-./Src/App/servo.d \
+./Src/App/parser.d \
 ./Src/App/settings.d 
 
 
@@ -42,7 +33,7 @@ Src/App/%.o Src/App/%.su: ../Src/App/%.c Src/App/subdir.mk
 clean: clean-Src-2f-App
 
 clean-Src-2f-App:
-	-$(RM) ./Src/App/app.d ./Src/App/app.o ./Src/App/app.su ./Src/App/bluetooth.d ./Src/App/bluetooth.o ./Src/App/bluetooth.su ./Src/App/flash.d ./Src/App/flash.o ./Src/App/flash.su ./Src/App/general.d ./Src/App/general.o ./Src/App/general.su ./Src/App/led.d ./Src/App/led.o ./Src/App/led.su ./Src/App/movements.d ./Src/App/movements.o ./Src/App/movements.su ./Src/App/servo.d ./Src/App/servo.o ./Src/App/servo.su ./Src/App/settings.d ./Src/App/settings.o ./Src/App/settings.su
+	-$(RM) ./Src/App/anim_data.d ./Src/App/anim_data.o ./Src/App/anim_data.su ./Src/App/animation.d ./Src/App/animation.o ./Src/App/animation.su ./Src/App/app.d ./Src/App/app.o ./Src/App/app.su ./Src/App/parser.d ./Src/App/parser.o ./Src/App/parser.su ./Src/App/settings.d ./Src/App/settings.o ./Src/App/settings.su
 
 .PHONY: clean-Src-2f-App
 

@@ -1,0 +1,3 @@
+../Src/App/Device/general.c:6:6:General_Copy_Float	24	static
+../Src/App/Device/general.c:9:6:General_Array_To_Hex_String	32	static
+../Src/App/Device/general.c:16:6:General_Hex_String_To_Array	32	static

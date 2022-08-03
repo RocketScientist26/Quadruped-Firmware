@@ -1,0 +1,2 @@
+../Src/App/Device/flash.c:6:6:Flash_Read	32	static
+../Src/App/Device/flash.c:36:10:Flash_Write	48	static

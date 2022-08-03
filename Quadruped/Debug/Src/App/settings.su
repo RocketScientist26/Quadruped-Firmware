@@ -1,3 +1,9 @@
-../Src/App/settings.c:15:6:Settings_Bluetooth_Change	24	static
-../Src/App/settings.c:71:6:Settings_Reset	8	static
-../Src/App/settings.c:93:6:Settings_Read	24	static
+../Src/App/settings.c:14:9:Settings_Verify	4	static
+../Src/App/settings.c:43:6:Settings_Write	8	static
+../Src/App/settings.c:52:6:Settings_Reset	8	static
+../Src/App/settings.c:57:6:Settings_Read	24	static
+../Src/App/settings.c:77:10:Settings_Data	4	static
+../Src/App/settings.c:80:6:Settings_Set_Calib	24	static
+../Src/App/settings.c:99:6:Settings_Write_LED	16	static
+../Src/App/settings.c:103:6:Settings_Write_Bluetooth	24	static
+../Src/App/settings.c:156:6:Settings_Init	16	static

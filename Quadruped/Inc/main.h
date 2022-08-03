@@ -71,7 +71,6 @@ void Error_Handler(void);
 #define SERVO_4_GPIO_Port GPIOB
 #define BT_STAT_Pin GPIO_PIN_8
 #define BT_STAT_GPIO_Port GPIOA
-#define BT_STAT_EXTI_IRQn EXTI9_5_IRQn
 #define BT_TX_Pin GPIO_PIN_9
 #define BT_TX_GPIO_Port GPIOA
 #define BT_RX_Pin GPIO_PIN_10

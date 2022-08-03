@@ -25,7 +25,9 @@ Src/App/settings.o: ../Src/App/settings.c ../Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Src/App/settings.h ../Src/App/flash.h
+ ../Src/App/settings.h ../Src/App/anim_data.h \
+ ../Src/App/Device/bluetooth.h ../Src/App/Device/flash.h \
+ ../Src/App/Device/led.h ../Src/App/Device/servo.h
 ../Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Inc/stm32f1xx_hal_conf.h:
@@ -54,4 +56,8 @@ Src/App/settings.o: ../Src/App/settings.c ../Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 ../Src/App/settings.h:
-../Src/App/flash.h:
+../Src/App/anim_data.h:
+../Src/App/Device/bluetooth.h:
+../Src/App/Device/flash.h:
+../Src/App/Device/led.h:
+../Src/App/Device/servo.h:

@@ -1,118 +1,167 @@
 #include <string.h>
+#include <stdlib.h>
 #include "main.h"
 #include "settings.h"
-#include "flash.h"
+#include "anim_data.h"
+#include "Device/bluetooth.h"
+#include "Device/flash.h"
+#include "Device/led.h"
+#include "Device/servo.h"
 
-extern UART_HandleTypeDef huart1;
+static uint8_t settings_act[35];
+static const uint8_t settings_def[35] = "#C+0+0+0+0+0+0+0+01234Quadruped 1\n";
 
-uint8_t settings[35] = "#C+0+0+0+0+0+0+0+01234Quadruped 1\n";
-
-static uint8_t settings_default[35] = "#C+0+0+0+0+0+0+0+01234Quadruped 1\n";
-static uint8_t settings_bt_name_default[19] = "AT+NAMEQuadruped\r\n";
-static uint8_t settings_bt_password_default[13] = "AT+PIN1234\r\n";
-static uint8_t settings_bt_tmp[20];
-
-void Settings_Bluetooth_Change(uint8_t *name, uint8_t *password){
-	//Reset Bluetooth
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
-	HAL_Delay(400);
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
-	HAL_Delay(500);//Wait for Bluetooth to start and reset it's name and password also
-	while(HAL_GPIO_ReadPin(BT_STAT_GPIO_Port, BT_STAT_Pin) != GPIO_PIN_RESET);//Wait for Bluetooth disconnect
-	HAL_Delay(300);
-
-	//Copy "AT+NAME"
-	memcpy(&settings_bt_tmp[0], &settings_bt_name_default[0], 7);
-	//Copy name
-	uint8_t i = 0;
-	while(i != 10){
-		if(name[i] != ' '){
-			settings_bt_tmp[i+7] = name[i];
-			i++;
-		}else{
-			break;
-		}
+uint8_t Settings_Verify(){
+	if(
+		(settings_act[0] != '#')||
+		(settings_act[1] != 'C')||
+		((settings_act[2] != '+') && (settings_act[2] != '-')) ||
+		((settings_act[4] != '+') && (settings_act[4] != '-')) ||
+		((settings_act[6] != '+') && (settings_act[6] != '-')) ||
+		((settings_act[8] != '+') && (settings_act[8] != '-')) ||
+		((settings_act[10] != '+') && (settings_act[10] != '-')) ||
+		((settings_act[12] != '+') && (settings_act[12] != '-')) ||
+		((settings_act[14] != '+') && (settings_act[14] != '-')) ||
+		((settings_act[16] != '+') && (settings_act[16] != '-')) ||
+		((settings_act[3] - 48) > 9) ||
+		((settings_act[5] - 48) > 9) ||
+		((settings_act[7] - 48) > 9) ||
+		((settings_act[9] - 48) > 9) ||
+		((settings_act[11] - 48) > 9) ||
+		((settings_act[13] - 48) > 9) ||
+		((settings_act[15] - 48) > 9) ||
+		((settings_act[17] - 48) > 9) ||
+		((settings_act[32] - 48) > 1) ||
+		(settings_act[33] != '\n') ||
+		(settings_act[34] != 0)
+	){
+		//Wrong data
+		return 0;
 	}
-	//Fill /r/n
-	settings_bt_tmp[i] = '\r';
-	settings_bt_tmp[i+1] = '\n';
-	//Send
-	HAL_UART_Transmit(&huart1, settings_bt_tmp, i+9, 2500);
-	HAL_Delay(200);
-
-
-	//Copy "AT+PIN"
-	memcpy(&settings_bt_tmp[0], &settings_bt_password_default[0], 6);
-	//Copy password
-	i = 0;
-	while(i != 4){
-		if(password[i] != ' '){
-			settings_bt_tmp[i+6] = password[i];
-			i++;
-		}else{
-			break;
-		}
+	return 1;
+}
+void Settings_Write(){
+	//Verify
+	if(!Settings_Verify()){
+		memcpy(&settings_act[0], &settings_def[0], 35);
 	}
-	//Fill /r/n
-	settings_bt_tmp[i] = '\r';
-	settings_bt_tmp[i+1] = '\n';
-	//Send
-	HAL_UART_Transmit(&huart1, settings_bt_tmp, i+8, 2500);
-	HAL_Delay(200);
 
-
-	//Reset Bluetooth
-	HAL_Delay(800);
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
-	HAL_Delay(400);
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
-	HAL_Delay(100);
+	//Write
+	Flash_Write((uint8_t *)&settings_act[0], 35);
 }
 void Settings_Reset(){
-	Flash_Write(settings_default,35);
-	memcpy(&settings[0], &settings_default[0], 35);
-
-	//Reset Bluetooth name and password to defaults
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
-	HAL_Delay(400);
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
-	HAL_Delay(500);//Wait for Bluetooth to start and reset it's name and password also
-	while(HAL_GPIO_ReadPin(BT_STAT_GPIO_Port, BT_STAT_Pin) != GPIO_PIN_RESET);//Wait for Bluetooth disconnect
-	HAL_Delay(300);
-	HAL_UART_Transmit(&huart1, settings_bt_name_default, 18, 2500);
-	HAL_Delay(50);
-	HAL_UART_Transmit(&huart1, settings_bt_password_default, 12, 2500);
-
-	//Reset Bluetooth
-	HAL_Delay(800);
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
-	HAL_Delay(400);
-	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
-	HAL_Delay(100);
+	memcpy(&settings_act[0], &settings_def[0], 35);
+	Flash_Write((uint8_t *)&settings_def[0], 35);
+	Settings_Write_Bluetooth(&settings_act[18], &settings_act[22]);
 }
 void Settings_Read(int8_t *calib, uint8_t *led){
-	//Read settings from flash
-	Flash_Read(settings, 35);
-	if(settings[0] != '#'){//Wrong data, reset
-		Settings_Reset();
+	Flash_Read(settings_act, 35);
+	//Verify
+	if(!Settings_Verify()){
+		memcpy(&settings_act[0], &settings_def[0], 35);
 	}
 
-	//Read LED enabled or not from string
-	if(settings[32] == '1'){
-		led = (uint8_t *)((uint8_t)1);
-	}else{
-		led = (uint8_t *)((uint8_t)0);
-		TIM2 -> CCR2 = 0;
-	}
-	
-	//Read calibration from string
+	//Calibration
 	uint8_t i = 0;
 	while(i != 8){
 		i++;
-		if(settings[(2*i)] == '-'){
-			calib[i-1] = (settings[(2*i)+1]-48)-(2*(settings[(2*i)+1]-48));
+		if(settings_act[(2 * i)] == '-'){
+			calib[i - 1] = (settings_act[(2 * i) + 1] - 48) - (2 * (settings_act[(2 * i) + 1] - 48));
 		}else{
-			calib[i-1] = settings[(2*i)+1]-48;
+			calib[i - 1] = settings_act[(2 * i) + 1] - 48;
 		}
 	}
+	//LED
+	*led = settings_act[32] - 48;
+}
+uint8_t *Settings_Data(){
+	return (uint8_t *)&settings_act[0];
+}
+void Settings_Set_Calib(int8_t *calib){
+	//Calibration
+	uint8_t i = 0;
+	while(i != 8){
+		if(calib[i] >= 0){
+			settings_act[2 + (i * 2)] = '+';
+			settings_act[3 + (i * 2)] = (uint8_t)calib[i] + (uint8_t)48;
+		}else{
+			settings_act[2 + (i * 2)] = '-';
+			settings_act[3 + (i * 2)] = (uint8_t)((int8_t)calib[i] - (2 * (int8_t)calib[i])) + (uint8_t)48;
+		}
+		i++;
+	}
+	
+	//Verify
+	if(!Settings_Verify()){
+		memcpy(&settings_act[0], &settings_def[0], 35);
+	}
+}
+void Settings_Write_LED(uint8_t led){
+	settings_act[32] = led + 48;
+	Settings_Write();
+}
+void Settings_Write_Bluetooth(uint8_t *bt_password, uint8_t *bt_name){
+	if(!Settings_Verify()){
+		memcpy(&settings_act[0], &settings_def[0], 35);
+	}
+
+	//Password
+	memcpy(&settings_act[18], bt_password, 4);
+	//Name
+	memcpy(&settings_act[22], bt_name, 10);
+
+	//Write
+	Flash_Write((uint8_t *)&settings_act[0], 35);
+
+	//Reset Bluetooth
+	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
+	HAL_Delay(400);
+	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
+
+	//Wait for Bluetooth disconnect
+	while(HAL_GPIO_ReadPin(BT_STAT_GPIO_Port, BT_STAT_Pin) != GPIO_PIN_RESET);
+	HAL_Delay(300);
+
+	//Set Bluetooth password
+	uint8_t *tmp = malloc(18);
+	memcpy(&tmp[0], (uint8_t *)"AT+PIN", 6);
+	memcpy(&tmp[6], (uint8_t *)&bt_password[0], 4);
+	memcpy(&tmp[10], (uint8_t *)"\r\n", 2);
+	Bluetooth_Transmit((uint8_t *)tmp, 12);
+	HAL_Delay(50);
+
+	//Set Bluetooth name
+	memcpy(&tmp[0], (uint8_t *)"AT+NAME", 7);
+	//Detect spaces at the end of the name
+	uint8_t i = 10;
+	while(i != 0){
+		i--;
+		if(bt_name[i] != ' '){
+			break;
+		}
+	}
+	memcpy(&tmp[7], (uint8_t *)&bt_name[0], i + 1);
+	memcpy(&tmp[i + 8], (uint8_t *)"\r\n", 2);
+	Bluetooth_Transmit((uint8_t *)tmp, 12);
+	Bluetooth_Transmit((uint8_t *)tmp, 18);
+	HAL_Delay(800);
+
+	//Reset Bluetooth
+	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
+	HAL_Delay(400);
+	HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
+}
+void Settings_Init(){
+	uint8_t led = 0;
+	Settings_Read(Servo_Calib_Data(), &led);
+
+	//Enable LED
+	LED_Enable(led);
+	LED_Init();
+
+	//Enable servos
+	Servo_Init();
+	Servo_Set((float *)&anim_data_standby[0]);
 }
