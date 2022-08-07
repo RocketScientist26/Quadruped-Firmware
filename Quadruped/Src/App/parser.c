@@ -12,11 +12,11 @@
 		#1-3
 			#[COMMAND ID (FROM 1 TO 6)]-[SPEED VALUE (FROM 1 TO 3)]
 	Kick:
-		#L000-000
-			#L[KICK DIRECTION (FROM 0 TO ANIMATION_KICK_DIRECTION_MAX)]-[KICK STRENGTH (FROM 0 TO ANIMATION_KICK_STRENGHT_MAX)]
+		#L000-00
+			#L[KICK DIRECTION (FROM 0 TO ANIM_DATA_KICK_DIRECTION_MAX)]-[KICK STRENGTH (FROM 0 TO ANIM_DATA_KICK_STRENGTH_MAX)]
 	Driving:
-		#K000-000
-			#K[DRIVING DIRECTION (FROM 0 TO ANIMATION_DRIVE_DIRECTION_MAX)]-[DRIVING SPEED (FROM 0 TO ANIMATION_DRIVE_STRENGHT_MAX)]
+		#K000-00
+			#K[DRIVING DIRECTION (FROM 0 TO ANIM_DATA_DRIVE_DIRECTION_MAX)]-[DRIVING SPEED (FROM 0 TO ANIM_DATA_DRIVE_STRENGHT_MAX)]
 	Special tricks:
 		#D1
 			#D[TRICK ID (FROM 1 to 3)]
@@ -132,8 +132,8 @@ uint8_t Parser_Update(uint8_t *data){
 				//Kick
 				//Data [DIRECTION][STRENGTH]
 				data[0] = ((Bluetooth_Rx_Data()[2] - 48) * 100) + ((Bluetooth_Rx_Data()[3] - 48) * 10) + (Bluetooth_Rx_Data()[4] - 48);
-				data[1] = ((Bluetooth_Rx_Data()[6] - 48) * 100) + ((Bluetooth_Rx_Data()[7] - 48) * 10) + (Bluetooth_Rx_Data()[8] - 48);
-				if((data[0] <= ANIM_DATA_KICK_DIRECTION_MAX) && (data[1] <= ANIM_DATA_KICK_STRENGHT_MAX)){
+				data[1] = ((Bluetooth_Rx_Data()[6] - 48) * 10) + (Bluetooth_Rx_Data()[7] - 48);
+				if((data[0] <= ANIM_DATA_KICK_DIRECTION_MAX) && (data[1] <= ANIM_DATA_KICK_STRENGTH_MAX)){
 					ret = PARSER_CMD_KICK;
 				}
 			break;
@@ -141,14 +141,14 @@ uint8_t Parser_Update(uint8_t *data){
 				//Drive
 				//Data [DIRECTION][STRENGTH]
 				data[0] = ((Bluetooth_Rx_Data()[2] - 48) * 100) + ((Bluetooth_Rx_Data()[3] - 48) * 10) + (Bluetooth_Rx_Data()[4] - 48);
-				data[1] = ((Bluetooth_Rx_Data()[6] - 48) * 100) + ((Bluetooth_Rx_Data()[7] - 48) * 10) + (Bluetooth_Rx_Data()[8] - 48);
-				if((data[0] <= ANIM_DATA_DRIVE_DIRECTION_MAX) && (data[1] <= ANIM_DATA_DRIVE_STRENGHT_MAX)){
+				data[1] = ((Bluetooth_Rx_Data()[6] - 48) * 10) + (Bluetooth_Rx_Data()[7] - 48);
+				if((data[0] <= ANIM_DATA_DRIVE_DIRECTION_MAX) && (data[1] <= ANIM_DATA_DRIVE_SPEED_MAX)){
 					ret = PARSER_CMD_DRIVE;
 				}
 			break;
 			case 'D':
 				//Tricks
-				switch(Bluetooth_Rx_Data()[3]){
+				switch(Bluetooth_Rx_Data()[2]){
 					case '1':
 						ret = PARSER_CMD_TRICK_1_SWIM;
 					break;

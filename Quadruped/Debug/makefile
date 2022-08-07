@@ -68,8 +68,8 @@ all: main-build
 main-build: Quadruped.elf secondary-outputs
 
 # Tool invocations
-Quadruped.elf Quadruped.map: $(OBJS) $(USER_OBJS) C:\Direct\Gaga\Quadruped\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Quadruped.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Direct\Gaga\Quadruped\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Quadruped.map" -Wl,--gc-sections -static  -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Quadruped.elf Quadruped.map: $(OBJS) $(USER_OBJS) C:\Direct\Gaga\GitTmp\Quadruped-Firmware\Quadruped\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Quadruped.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Direct\Gaga\GitTmp\Quadruped-Firmware\Quadruped\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Quadruped.map" -Wl,--gc-sections -static  -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

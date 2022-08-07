@@ -1,5 +1,10 @@
-../Src/App/animation.c:19:6:Animation_SysTick	4	static
-../Src/App/animation.c:24:6:Animation_Stop	4	static
-../Src/App/animation.c:31:6:Animation_Set	16	static
-../Src/App/animation.c:40:6:Animation_Play_Frame	32	static
-../Src/App/animation.c:86:6:Animation_Play	8	static
+../Src/App/animation.c:26:6:Animation_SysTick	8	static
+../Src/App/animation.c:31:6:Animation_Save_Current_Pose	16	static
+../Src/App/animation.c:34:6:Animation_Set_Kick	16	static
+../Src/App/animation.c:42:6:Animation_Kick	8	static
+../Src/App/animation.c:52:6:Animation_Set_Drive	16	static
+../Src/App/animation.c:57:9:Animation_Is_Playing	4	static
+../Src/App/animation.c:63:6:Animation_Set	16	static
+../Src/App/animation.c:73:6:Animation_Stop	4	static
+../Src/App/animation.c:80:6:Animation_Play_Frame	48	static
+../Src/App/animation.c:188:6:Animation_Play	8	static

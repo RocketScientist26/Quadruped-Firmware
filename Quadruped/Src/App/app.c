@@ -24,7 +24,7 @@ void App_Init(){
 	Parser_Init();
 }
 void App_Loop(){
-/*	//Handle settings reset with button
+	//Handle settings reset with button
 	if(Button_Pressed()){
 		if(!Button_Debounce_Read()){
 			Settings_Reset();
@@ -32,7 +32,7 @@ void App_Loop(){
 			app.cmd_time_ms = 0;
 		}
 	}
-*/
+
 	//Handle animation commands
 	uint8_t cmd = Parser_Update((uint8_t *)&app.data[0]);
 	//Reset command timeout timer
@@ -101,18 +101,25 @@ void App_Loop(){
 
 			//Go into Kick pose
 			case PARSER_CMD_KICK:
+				Animation_Set_Kick(*(uint8_t *)&app.data[0], *(uint8_t *)&app.data[1]);
+				Animation_Set((anim_data_t *)&anim_data_kick);
 			break;
 
 			//Start driving
 			case PARSER_CMD_DRIVE:
+				Animation_Set_Drive(*(uint8_t *)&app.data[0], *(uint8_t *)&app.data[1]);
+				Animation_Set((anim_data_t *)&anim_data_drive);
 			break;
 
 			//Start tricks
 			case PARSER_CMD_TRICK_1_SWIM:
+				Animation_Set((anim_data_t *)&anim_data_swim_s);
 			break;
 			case PARSER_CMD_TRICK_2_WORKOUT:
+				Animation_Set((anim_data_t *)&anim_data_workout_s);
 			break;
 			case PARSER_CMD_TRICK_3_HELLO:
+				Animation_Set((anim_data_t *)&anim_data_hello_s);
 			break;
 
 			//Prevent any return to standby pose or kick animations on timeout
@@ -120,13 +127,41 @@ void App_Loop(){
 				app.cmd = PARSER_CMD_NONE;
 			break;
 		}
-		
+
 		if(app.cmd && (app.cmd != PARSER_CMD_KICK)){
 			LED_Set_Mode(LED_ACCELERATE);
 		}
 	}
+	//We got same command but we need to update values
+	else if(cmd){
+		switch(app.cmd){
+			case PARSER_CMD_DRIVE:
+				Animation_Set_Drive(*(uint8_t *)&app.data[0], *(uint8_t *)&app.data[1]);
+			break;
+			case PARSER_CMD_KICK:
+				if(!Animation_Is_Playing()){
+					Animation_Set_Kick(*(uint8_t *)&app.data[0], *(uint8_t *)&app.data[1]);
+					Servo_Set((float *)&anim_data_kick.data[SERVO_COUNT]);
+				}
+			break;
+			case PARSER_CMD_TRICK_1_SWIM:
+				if(!Animation_Is_Playing()){
+					Animation_Set((anim_data_t *)&anim_data_swim_l);
+				}
+			break;
+			case PARSER_CMD_TRICK_2_WORKOUT:
+				if(!Animation_Is_Playing()){
+					Animation_Set((anim_data_t *)&anim_data_workout_l);
+				}
+			break;
+			case PARSER_CMD_TRICK_3_HELLO:
+				if(!Animation_Is_Playing()){
+					Animation_Set((anim_data_t *)&anim_data_hello_l);
+				}
+			break;
+		}
+	}
 
-	//!TBD Kick and Drive mode directions and value update
 	//!TBD Animation - Play START once, play loop/play loop with updated variables
 
 	//Set return to standby pose and kick animations if command timed out
@@ -148,15 +183,43 @@ void App_Loop(){
 			break;
 			case PARSER_CMD_KICK:
 				//Kick
+				app.cmd = PARSER_CMD_NONE;
+				app.cmd_time_ms = 0;
+				Animation_Stop();
+				Animation_Kick();
 			break;
 			case PARSER_CMD_TRICK_1_SWIM:
 				//Return from Swim
+				Animation_Save_Current_Pose((float *)&anim_data_swim_e.data[0]);
+				Animation_Set((anim_data_t *)&anim_data_swim_e);
+				while(Animation_Is_Playing()){
+					Animation_Play();
+				}
+				LED_Set_Mode(LED_COOL_DOWN);
+				app.cmd = PARSER_CMD_NONE;
+				app.cmd_time_ms = 0;
 			break;
 			case PARSER_CMD_TRICK_2_WORKOUT:
 				//Return from Workout
+				Animation_Save_Current_Pose((float *)&anim_data_workout_e.data[0]);
+				Animation_Set((anim_data_t *)&anim_data_workout_e);
+				while(Animation_Is_Playing()){
+					Animation_Play();
+				}
+				LED_Set_Mode(LED_COOL_DOWN);
+				app.cmd = PARSER_CMD_NONE;
+				app.cmd_time_ms = 0;
 			break;
 			case PARSER_CMD_TRICK_3_HELLO:
 				//Return from Hello
+				Animation_Save_Current_Pose((float *)&anim_data_hello_e.data[0]);
+				Animation_Set((anim_data_t *)&anim_data_hello_e);
+				while(Animation_Is_Playing()){
+					Animation_Play();
+				}
+				LED_Set_Mode(LED_COOL_DOWN);
+				app.cmd = PARSER_CMD_NONE;
+				app.cmd_time_ms = 0;
 			break;
 		}
 	}
