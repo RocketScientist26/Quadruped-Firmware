@@ -81,62 +81,66 @@ void Animation_Play_Frame(){
 	//Precalculations before first step of pose transition
 	if(!animation.c_step_n){
 		///Drive
-		/*
-			Direction 0-180, speed 0-80. Servos 1,2,5,6
-		*/
-		//Scale speed
-		//2*80 by this value should be decreased every servo, pointing to center
-		float scale = (((float)ANIM_DATA_FW_BW_3_H_BW - (float)ANIM_DATA_FW_BW_3_H_FW) / (2 * (float)ANIM_DATA_DRIVE_SPEED_MAX)) * ((float)ANIM_DATA_DRIVE_SPEED_MAX - animation.c_drive_speed);
-		anim_data_drive.data[1] = anim_data_forward_3.data[1] - scale;
-		anim_data_drive.data[2] = anim_data_forward_3.data[2] - scale;
-		anim_data_drive.data[5] = anim_data_forward_3.data[5] + scale;
-		anim_data_drive.data[6] = anim_data_forward_3.data[6] + scale;
+		if((uint32_t)animation.data == (uint32_t)&anim_data_drive.data){
+			/*
+				Direction 0-180, speed 0-80. Servos 1,2,5,6
+			*/
+			//Scale speed
+			animation.max_substep = (((ANIM_DATA_DRIVE_SUBSTEP_MAX - ANIM_DATA_DRIVE_SUBSTEP_MIN) / (float)ANIM_DATA_DRIVE_SPEED_MAX) * animation.c_drive_speed) + ANIM_DATA_DRIVE_SUBSTEP_MIN;
 
-		anim_data_drive.data[9] = anim_data_forward_3.data[9] + scale;
-		anim_data_drive.data[10] = anim_data_forward_3.data[10] + scale;
-		anim_data_drive.data[13] = anim_data_forward_3.data[13] - scale;
-		anim_data_drive.data[14] = anim_data_forward_3.data[14] - scale;
+			//2*80 by this value should be decreased every servo, pointing to center
+			float scale = (((float)ANIM_DATA_FW_BW_3_H_BW - (float)ANIM_DATA_FW_BW_3_H_FW) / (2 * (float)ANIM_DATA_DRIVE_SPEED_MAX)) * ((float)ANIM_DATA_DRIVE_SPEED_MAX - animation.c_drive_speed);
+			anim_data_drive.data[1] = anim_data_forward_3.data[1] - scale;
+			anim_data_drive.data[2] = anim_data_forward_3.data[2] - scale;
+			anim_data_drive.data[5] = anim_data_forward_3.data[5] + scale;
+			anim_data_drive.data[6] = anim_data_forward_3.data[6] + scale;
 
-		anim_data_drive.data[17] = anim_data_forward_3.data[17] + scale;
-		anim_data_drive.data[18] = anim_data_forward_3.data[18] + scale;
-		anim_data_drive.data[21] = anim_data_forward_3.data[21] - scale;
-		anim_data_drive.data[22] = anim_data_forward_3.data[22] - scale;
+			anim_data_drive.data[9] = anim_data_forward_3.data[9] + scale;
+			anim_data_drive.data[10] = anim_data_forward_3.data[10] + scale;
+			anim_data_drive.data[13] = anim_data_forward_3.data[13] - scale;
+			anim_data_drive.data[14] = anim_data_forward_3.data[14] - scale;
 
-		anim_data_drive.data[25] = anim_data_forward_3.data[25] - scale;
-		anim_data_drive.data[26] = anim_data_forward_3.data[26] - scale;
-		anim_data_drive.data[29] = anim_data_forward_3.data[29] + scale;
-		anim_data_drive.data[30] = anim_data_forward_3.data[30] + scale;
+			anim_data_drive.data[17] = anim_data_forward_3.data[17] + scale;
+			anim_data_drive.data[18] = anim_data_forward_3.data[18] + scale;
+			anim_data_drive.data[21] = anim_data_forward_3.data[21] - scale;
+			anim_data_drive.data[22] = anim_data_forward_3.data[22] - scale;
 
-		//Proportionally decrease apporiate side
-		float directional_scale = 0;
-		float directional_scale_max = ((ANIM_DATA_FW_BW_3_H_BW - scale) - (ANIM_DATA_FW_BW_3_H_FW + scale))/3.0f;
-		if(animation.c_drive_dir < (ANIM_DATA_DRIVE_DIRECTION_MAX / 2)){
-			directional_scale = (directional_scale_max/90.0f) * (90.0f - animation.c_drive_dir);
-			anim_data_drive.data[1] -= directional_scale;
-			anim_data_drive.data[2] -= directional_scale;
+			anim_data_drive.data[25] = anim_data_forward_3.data[25] - scale;
+			anim_data_drive.data[26] = anim_data_forward_3.data[26] - scale;
+			anim_data_drive.data[29] = anim_data_forward_3.data[29] + scale;
+			anim_data_drive.data[30] = anim_data_forward_3.data[30] + scale;
 
-			anim_data_drive.data[9] += directional_scale;
-			anim_data_drive.data[10] += directional_scale;
+			//Proportionally decrease apporiate side
+			float directional_scale = 0;
+			float directional_scale_max = ((ANIM_DATA_FW_BW_3_H_BW - scale) - (ANIM_DATA_FW_BW_3_H_FW + scale)) / 2.0f;
+			if(animation.c_drive_dir < (ANIM_DATA_DRIVE_DIRECTION_MAX / 2)){
+				directional_scale = (directional_scale_max/90.0f) * (90.0f - animation.c_drive_dir);
+				anim_data_drive.data[1] -= directional_scale;
+				anim_data_drive.data[2] -= directional_scale;
 
-			anim_data_drive.data[17] += directional_scale;
-			anim_data_drive.data[18] += directional_scale;
+				anim_data_drive.data[9] += directional_scale;
+				anim_data_drive.data[10] += directional_scale;
 
-			anim_data_drive.data[25] -= directional_scale;
-			anim_data_drive.data[26] -= directional_scale;
+				anim_data_drive.data[17] += directional_scale;
+				anim_data_drive.data[18] += directional_scale;
 
-		}else if(animation.c_drive_dir > (ANIM_DATA_DRIVE_DIRECTION_MAX / 2)){
-			directional_scale = (directional_scale_max/90.0f) * (animation.c_drive_dir - 90.0f);
-			anim_data_drive.data[5] += directional_scale;
-			anim_data_drive.data[6] += directional_scale;
+				anim_data_drive.data[25] -= directional_scale;
+				anim_data_drive.data[26] -= directional_scale;
 
-			anim_data_drive.data[13] -= directional_scale;
-			anim_data_drive.data[14] -= directional_scale;
+			}else if(animation.c_drive_dir > (ANIM_DATA_DRIVE_DIRECTION_MAX / 2)){
+				directional_scale = (directional_scale_max/90.0f) * (animation.c_drive_dir - 90.0f);
+				anim_data_drive.data[5] += directional_scale;
+				anim_data_drive.data[6] += directional_scale;
 
-			anim_data_drive.data[21] -= directional_scale;
-			anim_data_drive.data[22] -= directional_scale;
+				anim_data_drive.data[13] -= directional_scale;
+				anim_data_drive.data[14] -= directional_scale;
 
-			anim_data_drive.data[29] += directional_scale;
-			anim_data_drive.data[30] += directional_scale;
+				anim_data_drive.data[21] -= directional_scale;
+				anim_data_drive.data[22] -= directional_scale;
+
+				anim_data_drive.data[29] += directional_scale;
+				anim_data_drive.data[30] += directional_scale;
+			}
 		}
 	}
 

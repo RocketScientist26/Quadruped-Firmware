@@ -7,4 +7,4 @@
 ../Src/App/animation.c:63:6:Animation_Set	16	static
 ../Src/App/animation.c:73:6:Animation_Stop	4	static
 ../Src/App/animation.c:80:6:Animation_Play_Frame	48	static
-../Src/App/animation.c:188:6:Animation_Play	8	static
+../Src/App/animation.c:192:6:Animation_Play	8	static

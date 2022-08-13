@@ -1,2 +1,2 @@
-../Src/App/parser.c:46:9:Parser_Update	32	static
-../Src/App/parser.c:207:6:Parser_Init	8	static
+../Src/App/parser.c:48:9:Parser_Update	32	static
+../Src/App/parser.c:209:6:Parser_Init	8	static

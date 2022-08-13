@@ -41,14 +41,16 @@
 			#J[NAME][PASSWORD]
 */
 
-uint8_t parser_symbols[] = {'1', '2', '3', '4', '5', '6', 'L', 'K', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-uint8_t parser_lengths[] = {4, 4, 4, 4, 4, 4, 9, 9, 3, 3, 2, 2, 2, 5, 16};
+uint8_t parser_symbols[] = {'?', '1', '2', '3', '4', '5', '6', 'L', 'K', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+uint8_t parser_lengths[] = {2, 4, 4, 4, 4, 4, 4, 9, 9, 3, 3, 2, 2, 2, 5, 16};
+uint8_t parser_handshake[] = "#R";
+
 uint8_t Parser_Update(uint8_t *data){
 	uint8_t ret = PARSER_CMD_NONE;
 	if(Bluetooth_Rx_Ready()){
 		switch(Bluetooth_Rx_Data()[1]){
 			case '?':
-				Bluetooth_Transmit((uint8_t *)"#R", 2);
+				Bluetooth_Transmit((uint8_t *)&parser_handshake[0], 2);
 			break;
 			case '1':
 				switch(Bluetooth_Rx_Data()[3]){
@@ -79,19 +81,6 @@ uint8_t Parser_Update(uint8_t *data){
 			case '3':
 				switch(Bluetooth_Rx_Data()[3]){
 					case '1':
-						ret = PARSER_CMD_TURN_LEFT_1;
-					break;
-					case '2':
-						ret = PARSER_CMD_TURN_LEFT_2;
-					break;
-					case '3':
-						ret = PARSER_CMD_TURN_LEFT_3;
-					break;
-				}
-			break;
-			case '4':
-				switch(Bluetooth_Rx_Data()[3]){
-					case '1':
 						ret = PARSER_CMD_TURN_RIGHT_1;
 					break;
 					case '2':
@@ -99,6 +88,19 @@ uint8_t Parser_Update(uint8_t *data){
 					break;
 					case '3':
 						ret = PARSER_CMD_TURN_RIGHT_3;
+					break;
+				}
+			break;
+			case '4':
+				switch(Bluetooth_Rx_Data()[3]){
+					case '1':
+						ret = PARSER_CMD_TURN_LEFT_1;
+					break;
+					case '2':
+						ret = PARSER_CMD_TURN_LEFT_2;
+					break;
+					case '3':
+						ret = PARSER_CMD_TURN_LEFT_3;
 					break;
 				}
 			break;

@@ -11,6 +11,8 @@
 
 #define ANIM_DATA_DRIVE_DIRECTION_MAX 180
 #define ANIM_DATA_DRIVE_SPEED_MAX 80
+#define ANIM_DATA_DRIVE_SUBSTEP_MAX 0.5f
+#define ANIM_DATA_DRIVE_SUBSTEP_MIN 0.2f
 
 ///General patterns
 #define ANIM_DATA_VT 40
@@ -28,46 +30,46 @@
 #define ANIM_DATA_FW_BW_1_H_FW 33
 #define ANIM_DATA_FW_BW_1_H_BW 50
 
-#define ANIM_DATA_FW_BW_2_V_UP 40
-#define ANIM_DATA_FW_BW_2_V_DW 75
-#define ANIM_DATA_FW_BW_2_H_FW 18
-#define ANIM_DATA_FW_BW_2_H_BW 45
+#define ANIM_DATA_FW_BW_2_V_UP 50
+#define ANIM_DATA_FW_BW_2_V_DW 80
+#define ANIM_DATA_FW_BW_2_H_FW 25
+#define ANIM_DATA_FW_BW_2_H_BW 55
 
-#define ANIM_DATA_FW_BW_3_V_UP 28
-#define ANIM_DATA_FW_BW_3_V_DW 75
-#define ANIM_DATA_FW_BW_3_H_FW 3
-#define ANIM_DATA_FW_BW_3_H_BW 75
+#define ANIM_DATA_FW_BW_3_V_UP 45
+#define ANIM_DATA_FW_BW_3_V_DW 80
+#define ANIM_DATA_FW_BW_3_H_FW 18
+#define ANIM_DATA_FW_BW_3_H_BW 55
 
 //Turn Left, Turn Right
-#define ANIM_DATA_TR_TL_1_V_UP 40
+#define ANIM_DATA_TR_TL_1_V_UP 55
 #define ANIM_DATA_TR_TL_1_V_DW 75
 #define ANIM_DATA_TR_TL_1_H_FW 45
 #define ANIM_DATA_TR_TL_1_H_BW 35
 
-#define ANIM_DATA_TR_TL_2_V_UP 35
-#define ANIM_DATA_TR_TL_2_V_DW 75
-#define ANIM_DATA_TR_TL_2_H_FW 45
-#define ANIM_DATA_TR_TL_2_H_BW 25
+#define ANIM_DATA_TR_TL_2_V_UP 50
+#define ANIM_DATA_TR_TL_2_V_DW 80
+#define ANIM_DATA_TR_TL_2_H_FW 55
+#define ANIM_DATA_TR_TL_2_H_BW 38
 
-#define ANIM_DATA_TR_TL_3_V_UP 35
-#define ANIM_DATA_TR_TL_3_V_DW 75
-#define ANIM_DATA_TR_TL_3_H_FW 47
-#define ANIM_DATA_TR_TL_3_H_BW 18
+#define ANIM_DATA_TR_TL_3_V_UP 45
+#define ANIM_DATA_TR_TL_3_V_DW 80
+#define ANIM_DATA_TR_TL_3_H_FW 60
+#define ANIM_DATA_TR_TL_3_H_BW 38
 
 //Slide Left, Slide Right
-#define ANIM_DATA_SR_SL_1_V_UP 28
+#define ANIM_DATA_SR_SL_1_V_UP 55
 #define ANIM_DATA_SR_SL_1_V_DW 75
 #define ANIM_DATA_SR_SL_1_H_FW 55
 #define ANIM_DATA_SR_SL_1_H_BW 65
 
-#define ANIM_DATA_SR_SL_2_V_UP 25
-#define ANIM_DATA_SR_SL_2_V_DW 75
+#define ANIM_DATA_SR_SL_2_V_UP 50
+#define ANIM_DATA_SR_SL_2_V_DW 80
 #define ANIM_DATA_SR_SL_2_H_FW 50
 #define ANIM_DATA_SR_SL_2_H_BW 70
 
-#define ANIM_DATA_SR_SL_3_V_UP 22
-#define ANIM_DATA_SR_SL_3_V_DW 75
-#define ANIM_DATA_SR_SL_3_H_FW 40
+#define ANIM_DATA_SR_SL_3_V_UP 45
+#define ANIM_DATA_SR_SL_3_V_DW 80
+#define ANIM_DATA_SR_SL_3_H_FW 35
 #define ANIM_DATA_SR_SL_3_H_BW 80
 
 typedef struct{

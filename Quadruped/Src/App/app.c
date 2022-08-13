@@ -19,9 +19,15 @@ void App_SysTick(){
 	}
 }
 
+float fdata[8] = {ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V};
 void App_Init(){
 	Settings_Init();
 	Parser_Init();
+
+	/*while(1){
+		Servo_Set((float *)&fdata[0]);
+		HAL_Delay(500);
+	}*/
 }
 void App_Loop(){
 	//Handle settings reset with button
@@ -162,9 +168,7 @@ void App_Loop(){
 		}
 	}
 
-	//!TBD Animation - Play START once, play loop/play loop with updated variables
-
-	//Set return to standby pose and kick animations if command timed out
+	//Return to standby pose and kick animations if command timed out
 	if(app.cmd_time_ms == APP_CMD_TIMEOUT_MS){
 		switch(app.cmd){
 			case PARSER_CMD_FORAWRD_1: case PARSER_CMD_FORAWRD_2: case PARSER_CMD_FORAWRD_3:

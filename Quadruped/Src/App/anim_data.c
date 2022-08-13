@@ -43,7 +43,7 @@ const anim_data_t anim_data_forward_2 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.6,
+	.max_substep = 0.35,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_forward_3 = {
@@ -55,7 +55,7 @@ const anim_data_t anim_data_forward_3 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.5,
 	.frame_delay = 2
 };
 //Backward
@@ -80,7 +80,7 @@ const anim_data_t anim_data_backward_2 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.6,
+	.max_substep = 0.35,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_backward_3 = {
@@ -92,7 +92,7 @@ const anim_data_t anim_data_backward_3 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.5,
 	.frame_delay = 2
 };
 //Turn Left
@@ -105,7 +105,7 @@ const anim_data_t anim_data_turn_left_1 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.25,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_turn_left_2 = {
@@ -117,7 +117,7 @@ const anim_data_t anim_data_turn_left_2 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.35,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_turn_left_3 = {
@@ -129,7 +129,7 @@ const anim_data_t anim_data_turn_left_3 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.5,
 	.frame_delay = 2
 };
 //Turn Right
@@ -142,7 +142,7 @@ const anim_data_t anim_data_turn_right_1 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.25,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_turn_right_2 = {
@@ -154,7 +154,7 @@ const anim_data_t anim_data_turn_right_2 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.35,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_turn_right_3 = {
@@ -166,7 +166,7 @@ const anim_data_t anim_data_turn_right_3 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.5,
 	.frame_delay = 2
 };
 //Slide Left
@@ -191,7 +191,7 @@ const anim_data_t anim_data_slide_left_2 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.4,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_slide_left_3 = {
@@ -203,7 +203,7 @@ const anim_data_t anim_data_slide_left_3 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.45,
 	.frame_delay = 2
 };
 //Slide Right
@@ -228,7 +228,7 @@ const anim_data_t anim_data_slide_right_2 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.4,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_slide_right_3 = {
@@ -240,7 +240,7 @@ const anim_data_t anim_data_slide_right_3 = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.45,
 	.frame_delay = 2
 };
 
@@ -248,29 +248,30 @@ const anim_data_t anim_data_slide_right_3 = {
 const anim_data_t anim_data_swim_s = {
 	.data = {
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V,
-		90, 73, 70, 90, 90, 87, 150, 60,
-		90, 80, 70, 60, 90, 80, 150, 60,
-		90, 0, 70, 60, 60, 80, 150, 60,
-		90, 0, 70, 60, 90, 80, 150, 60,
-		20, 0, 0, 150, 0, 150, 150, 130
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, 60, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, 60, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		60, ANIM_DATA_CA_H, 30, ANIM_DATA_ST_V, ANIM_DATA_ST_V, 30, ANIM_DATA_CA_H, 60,
+		ANIM_DATA_CA_V, ANIM_DATA_CA_H, 30, ANIM_DATA_CA_V, ANIM_DATA_CA_V, 30, ANIM_DATA_CA_H, ANIM_DATA_CA_V,
+		25, ANIM_DATA_CA_H, 15, 45, 25, 45, ANIM_DATA_CA_H, 45
 	},
-	.poses = 6,
+	.poses = 8,
 	.loop = ANIM_DATA_ONCE,
-	.max_substep = 0.3,
+	.max_substep = 0.25,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_swim_l = {
 	.data = {
-		0, 0, 20, 135, 15, 90, 150, 135,
-		15, 0, 40, 150, 15, 110, 150, 150,
-		0, 0, 60, 150, 15, 130, 150, 135,
-		15, 0, 80, 150, 15, 150, 150, 150,
-		0, 0, 60, 150, 0, 130, 150, 135,
-		15, 0, 40, 135, 0, 110, 150, 150,
-		0, 0, 20, 135, 0, 90, 150, 135,
-		15, 0, 0, 135, 0, 70, 150, 150
+		25, ANIM_DATA_CA_H, 15, 45, 25, 45, ANIM_DATA_CA_H, 45,
+		45, ANIM_DATA_CA_H, 15, 45, 25, 45, ANIM_DATA_CA_H, 25,
+		25, ANIM_DATA_CA_H, 45, 25, 45, 15, ANIM_DATA_CA_H, 45,
+		45, ANIM_DATA_CA_H, 45, 25, 45, 15, ANIM_DATA_CA_H, 25,
+		25, ANIM_DATA_CA_H, 45, 25, 45, 15, ANIM_DATA_CA_H, 45,
+		45, ANIM_DATA_CA_H, 15, 45, 25, 45, ANIM_DATA_CA_H, 25,
+		25, ANIM_DATA_CA_H, 15, 45, 25, 45, ANIM_DATA_CA_H, 45
 	},
-	.poses = 8,
+	.poses = 7,
 	.loop = ANIM_DATA_LOOP,
 	.max_substep = 0.3,
 	.frame_delay = 2
@@ -278,14 +279,15 @@ const anim_data_t anim_data_swim_l = {
 volatile anim_data_t anim_data_swim_e = {
 	.data = {
 		ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT,
-		20, 0, 0, 150, 0, 150, 150, 130,
-		90, 0, 70, 60, 90, 80, 150, 60,
-		90, 0, 70, 60, 60, 80, 150, 60,
-		90, 80, 70, 60, 90, 80, 150, 60,
-		90, 73, 70, 90, 90, 87, 150, 60,
+		ANIM_DATA_CA_V, ANIM_DATA_CA_H, 30, ANIM_DATA_CA_V, ANIM_DATA_CA_V, 30, ANIM_DATA_CA_H, ANIM_DATA_CA_V,
+		60, ANIM_DATA_CA_H, 30, ANIM_DATA_ST_V, ANIM_DATA_ST_V, 30, ANIM_DATA_CA_H, 60,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, 60, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, 60, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V
 	},
-	.poses = 7,
+	.poses = 8,
 	.loop = ANIM_DATA_ONCE,
 	.max_substep = 0.3,
 	.frame_delay = 2
@@ -294,35 +296,35 @@ volatile anim_data_t anim_data_swim_e = {
 const anim_data_t anim_data_workout_s = {
 	.data = {
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V,
-		60, 71, 27, 60, 40, 62, 80, 60,
-		60, 47, 47, 60, 60, 47, 100, 60,
-		60, 100, 47, 60, 40, 47, 100, 60,
-		60, 100, 47, 60, 60, 47, 100, 60,
-		13, 100, 27, 60, 60, 27, 100, 13
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, 60, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, 60, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		60, ANIM_DATA_CA_H, 30, ANIM_DATA_ST_V, ANIM_DATA_ST_V, 30, ANIM_DATA_CA_H, 60
 	},
 	.poses = 6,
 	.loop = ANIM_DATA_ONCE,
-	.max_substep = 0.3,
+	.max_substep = 0.25,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_workout_l = {
 	.data = {
-		13, 100, 27, 60, 40, 27, 100, 13,//Down
-		13, 100, 27, 60, 60, 27, 100, 13//Up
+		60, ANIM_DATA_CA_H, 30, ANIM_DATA_ST_V, ANIM_DATA_ST_V, 30, ANIM_DATA_CA_H, 60,
+		60, ANIM_DATA_CA_H, 30, 60, 60, 30, ANIM_DATA_CA_H, 60
 	},
 	.poses = 2,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.1,
 	.frame_delay = 2
 };
 volatile anim_data_t anim_data_workout_e = {
 	.data = {
 		ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT,
-		13, 100, 27, 60, 60, 27, 100, 13,
-		60, 100, 47, 60, 60, 47, 100, 60,
-		60, 100, 47, 60, 40, 47, 100, 60,
-		60, 47, 47, 60, 60, 47, 100, 60,
-		60, 51, 47, 60, 40, 42, 100, 60,
+		60, ANIM_DATA_CA_H, 30, ANIM_DATA_ST_V, ANIM_DATA_ST_V, 30, ANIM_DATA_CA_H, 60,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_CA_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, 60, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
+		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, 60, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_CA_H, ANIM_DATA_ST_V,
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V
 	},
 	.poses = 7,
@@ -334,44 +336,29 @@ volatile anim_data_t anim_data_workout_e = {
 const anim_data_t anim_data_hello_s = {
 	.data = {
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V,
-		90, 73, 70, 90, 90, 87, 150, 60,
-		90, 80, 70, 60, 90, 80, 150, 60,
-		90, 0, 70, 60, 60, 80, 150, 60,
-		90, 0, 70, 60, 90, 80, 150, 60,
-		20, 0, 0, 150, 0, 150, 150, 130,
+		55, 50, 45, ANIM_DATA_ST_V, 10, 70, 35, ANIM_DATA_ST_V
 	},
-	.poses = 6,
+	.poses = 2,
 	.loop = ANIM_DATA_ONCE,
-	.max_substep = 0.3,
+	.max_substep = 0.35,
 	.frame_delay = 2
 };
 const anim_data_t anim_data_hello_l = {
 	.data = {
-		0, 0, 20, 135, 15, 90, 150, 135,
-		15, 0, 40, 150, 15, 110, 150, 150,
-		0, 0, 60, 150, 15, 130, 150, 135,
-		15, 0, 80, 150, 15, 150, 150, 150,
-		0, 0, 60, 150, 0, 130, 150, 135,
-		15, 0, 40, 135, 0, 110, 150, 150,
-		0, 0, 20, 135, 0, 90, 150, 135,
-		15, 0, 0, 135, 0, 70, 150, 150
+		55, 50, 45, ANIM_DATA_ST_V, 10, 70, 35, ANIM_DATA_ST_V,
+		55, 50, 45, ANIM_DATA_ST_V, 10, 50, 35, ANIM_DATA_ST_V
 	},
-	.poses = 8,
+	.poses = 2,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = 0.1,
 	.frame_delay = 2
 };
 volatile anim_data_t anim_data_hello_e = {
 	.data = {
 		ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT, ANIM_DATA_VT,
-		20, 0, 0, 150, 0, 150, 150, 130,
-		90, 0, 70, 60, 90, 80, 150, 60,
-		90, 0, 70, 60, 60, 80, 150, 60,
-		90, 80, 70, 60, 90, 80, 150, 60,
-		90, 73, 70, 90, 90, 87, 150, 60,
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V,
 	},
-	.poses = 7,
+	.poses = 2,
 	.loop = ANIM_DATA_ONCE,
 	.max_substep = 0.3,
 	.frame_delay = 2
@@ -387,6 +374,6 @@ volatile anim_data_t anim_data_drive = {
 	},
 	.poses = 4,
 	.loop = ANIM_DATA_LOOP,
-	.max_substep = 0.3,
+	.max_substep = ANIM_DATA_DRIVE_SUBSTEP_MAX,
 	.frame_delay = 2
 };

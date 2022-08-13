@@ -1,4 +1,4 @@
-#define APP_CMD_TIMEOUT_MS 100
+#define APP_CMD_TIMEOUT_MS 150
 #define APP_DATA_BUFF_SIZE 64
 
 void App_SysTick();
