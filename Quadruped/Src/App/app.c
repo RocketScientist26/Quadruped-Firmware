@@ -19,15 +19,9 @@ void App_SysTick(){
 	}
 }
 
-float fdata[8] = {ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V};
 void App_Init(){
 	Settings_Init();
 	Parser_Init();
-
-	/*while(1){
-		Servo_Set((float *)&fdata[0]);
-		HAL_Delay(500);
-	}*/
 }
 void App_Loop(){
 	//Handle settings reset with button
