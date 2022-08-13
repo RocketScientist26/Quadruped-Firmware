@@ -13,7 +13,7 @@ const float anim_data_calib[] = {
 volatile anim_data_t anim_data_kick = {
 	.data = {
 		ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V,
-		55, 50, 45, 75, ANIM_DATA_VT, ANIM_DATA_VT, 35, 75
+		55, 50, 45, ANIM_DATA_ST_V, ANIM_DATA_VT, ANIM_DATA_VT, 35, ANIM_DATA_ST_V
 	},
 	.poses = 2,
 	.loop = ANIM_DATA_ONCE,

@@ -12,7 +12,7 @@
 		#1-3
 			#[COMMAND ID (FROM 1 TO 6)]-[SPEED VALUE (FROM 1 TO 3)]
 	Kick:
-		#L000-00
+		#L00-00
 			#L[KICK DIRECTION (FROM 0 TO ANIM_DATA_KICK_DIRECTION_MAX)]-[KICK STRENGTH (FROM 0 TO ANIM_DATA_KICK_STRENGTH_MAX)]
 	Driving:
 		#K000-00
@@ -42,7 +42,7 @@
 */
 
 uint8_t parser_symbols[] = {'?', '1', '2', '3', '4', '5', '6', 'L', 'K', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-uint8_t parser_lengths[] = {2, 4, 4, 4, 4, 4, 4, 9, 9, 3, 3, 2, 2, 2, 5, 16};
+uint8_t parser_lengths[] = {2, 4, 4, 4, 4, 4, 4, 7, 8, 3, 3, 2, 2, 2, 5, 16};
 uint8_t parser_handshake[] = "#R";
 
 uint8_t Parser_Update(uint8_t *data){
@@ -133,8 +133,8 @@ uint8_t Parser_Update(uint8_t *data){
 			case 'L':
 				//Kick
 				//Data [DIRECTION][STRENGTH]
-				data[0] = ((Bluetooth_Rx_Data()[2] - 48) * 100) + ((Bluetooth_Rx_Data()[3] - 48) * 10) + (Bluetooth_Rx_Data()[4] - 48);
-				data[1] = ((Bluetooth_Rx_Data()[6] - 48) * 10) + (Bluetooth_Rx_Data()[7] - 48);
+				data[0] = ((Bluetooth_Rx_Data()[2] - 48) * 10) + (Bluetooth_Rx_Data()[3] - 48);
+				data[1] = ((Bluetooth_Rx_Data()[5] - 48) * 10) + (Bluetooth_Rx_Data()[6] - 48);
 				if((data[0] <= ANIM_DATA_KICK_DIRECTION_MAX) && (data[1] <= ANIM_DATA_KICK_STRENGTH_MAX)){
 					ret = PARSER_CMD_KICK;
 				}
