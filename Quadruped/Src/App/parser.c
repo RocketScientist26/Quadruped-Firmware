@@ -8,6 +8,9 @@
 
 /*
 	Commands
+	Robot detect:
+		#?
+			#R
 	Move:
 		#1-3
 			#[COMMAND ID (FROM 1 TO 6)]-[SPEED VALUE (FROM 1 TO 3)]
