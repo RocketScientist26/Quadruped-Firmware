@@ -1,6 +1,10 @@
 #include "main.h"
 #include "anim_data.h"
 
+//Storage pose
+const float anim_data_storage_pose[] = {
+	ANIM_DATA_SP_V, ANIM_DATA_SP_H, ANIM_DATA_SP_H, ANIM_DATA_SP_V, ANIM_DATA_SP_V, ANIM_DATA_SP_H, ANIM_DATA_SP_H, ANIM_DATA_SP_V
+};
 //Standby
 const float anim_data_standby[] = {
 	ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V, ANIM_DATA_ST_V, ANIM_DATA_ST_H, ANIM_DATA_ST_H, ANIM_DATA_ST_V

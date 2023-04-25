@@ -12,5 +12,6 @@ enum{
 
 void LED_Breath();
 void LED_Set_Mode(uint8_t mode);
+uint8_t LED_Is_Enabled();
 void LED_Enable(uint8_t enable);
 void LED_Init();

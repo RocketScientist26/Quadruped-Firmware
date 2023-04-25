@@ -9,5 +9,6 @@
 
 int8_t *Servo_Calib_Data();
 void Servo_Set_Calib(int8_t calib, uint8_t servo);
+void Servo_Set_Storage_Pose();
 void Servo_Set(float *values);
 void Servo_Init();

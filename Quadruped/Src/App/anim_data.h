@@ -16,6 +16,9 @@
 
 ///General patterns
 #define ANIM_DATA_VT 40
+//Storage pose
+#define ANIM_DATA_SP_V 95
+#define ANIM_DATA_SP_H 92
 //Standby pose
 #define ANIM_DATA_ST_V 75
 #define ANIM_DATA_ST_H 40
@@ -80,8 +83,9 @@ typedef struct{
 	float data[];
 }anim_data_t;
 
-extern const float anim_data_calib[];
+extern const float anim_data_storage_pose[];
 extern const float anim_data_standby[];
+extern const float anim_data_calib[];
 extern volatile anim_data_t anim_data_kick;
 extern const anim_data_t anim_data_forward_1;
 extern const anim_data_t anim_data_forward_2;

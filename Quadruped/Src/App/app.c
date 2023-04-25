@@ -24,12 +24,26 @@ void App_Init(){
 	Parser_Init();
 }
 void App_Loop(){
-	//Handle settings reset with button
+	//Handle storage pose and settings reset with button
 	if(Button_Pressed()){
 		if(!Button_Debounce_Read()){
-			Settings_Reset();
-			app.cmd = PARSER_CMD_NONE;
-			app.cmd_time_ms = 0;
+			HAL_Delay(2000);
+			if(!Button_Debounce_Read()){
+				//Store LED state
+				uint8_t led_en = LED_Is_Enabled();
+				LED_Enable(0);
+				//Reset settings
+				Settings_Reset();
+				app.cmd = PARSER_CMD_NONE;
+				app.cmd_time_ms = 0;
+				//Restore LED state after some delay (user should release button when led goes off)
+				HAL_Delay(500);
+				LED_Enable(led_en);
+			}else{
+				//Set storage pose
+				Servo_Set((float *)&anim_data_storage_pose[0]);
+				while(1);
+			}
 		}
 	}
 
